@@ -21,7 +21,7 @@
     this.setHeights();
 
     // Handle events
-    $(window).on("resize.equalHeights.equalHeights-" + this.groupId, this.setHeights);
+    $(window).on("debouncedresize.equalHeights.equalHeights-" + this.groupId, this.setHeights);
     this.group.find("img").on("load.equalHeights", this.setHeights);
   };
 
