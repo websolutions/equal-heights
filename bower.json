@@ -13,7 +13,7 @@
     "bower_components"
   ],
   "dependencies": {
-    "jquery": ">= 1.6.4",
+    "jquery": ">= 1.7.2",
     "jquery-smartresize": "louisremi/jquery-smartresize"
   }
 }
