@@ -1,61 +1,52 @@
 /**
- * wsol.equalHeights.js 1.0.0
+ * wsol.equalHeights.js 2.0.0
  * http://github.com/websolutions/equal-heights
  */
 
-
 ;(function ($, window, document, undefined) {
-
-  var groupId = 0;
-
-  function EqualHeights(group) {
-    this.group = group;
-    this.groupId = groupId++;
-
-    this.setHeights = $.proxy(this.setHeights, this);
-
-    this.init();
+  if (!$.wsol) {
+    $.wsol = {};
   }
 
-  EqualHeights.prototype.init = function() {
-    this.setHeights();
+  $.wsol.equalHeights = function(group) {
+    var base = this;
 
-    // Handle events
-    $(window).on("debouncedresize.equalHeights.equalHeights-" + this.groupId, this.setHeights);
-    this.group.find("img").on("load.equalHeights", this.setHeights);
+    base.$group = $(group);
+    base.group = group;
+
+    base.$group.data("wsol.equalHeights", base);
+
+    base.init = function() {
+      base.equalize();
+
+      // Handle events
+      $(window).on("debouncedresize.wsol.equalHeights", base.equalize);
+      base.$group.find("img").on("load.wsol.equalHeights", base.equalize);
+    };
+
+    base.equalize = function() {
+      var maxHeight = 0;
+      base.$group.css("height", "auto").each(function() {
+        var itemHeight = $(this).outerHeight(true);
+        if (itemHeight > maxHeight) maxHeight = itemHeight;
+      }).css("height", maxHeight);
+    };
+
+    base.destroy = function() {
+      base.$group.css("height", "");
+
+      // Remove event listeners
+      $(window).off(".wsol.equalHeights");
+      base.$group.find("img").off(".wsol.equalHeights");
+    };
+
+    base.init();
   };
 
-  EqualHeights.prototype.setHeights = function() {
-    var maxHeight = 0;
-    this.group.css("height", "auto").each(function() {
-      var itemHeight = $(this).outerHeight(true);
-      if (itemHeight > maxHeight) maxHeight = itemHeight;
-    }).css("height", maxHeight);
-  };
+  $.fn.wsol_equalHeights = function() {
+    new $.wsol.equalHeights(this);
 
-  EqualHeights.prototype.destroy = function() {
-    this.group.css("height", "");
-
-    // Remove event listeners
-    $(window).off(".equalHeights-" + this.groupId);
-    this.group.find("img").off(".equalHeights");
-  };
-
-  $.fn.equalHeights = function() {
-    var group = this, plugin = new EqualHeights(group);
-    return group.each(function(index, element) {
-      element.equalHeights = plugin;
-    });
-  };
-
-  $.fn.unequalHeights = function() {
-    var group = this;
-    return group.each(function(index, element) {
-      if (element.equalHeights) {
-        element.equalHeights.destroy();
-        return false; // no need to look at the rest of the elements
-      }
-    });
+    return this;
   };
 
 })(jQuery, window, document);

@@ -28,10 +28,10 @@ The most basic example follows this DOM structure:
 
 And is initialized like so:
 ``` javascript
-$(".gallery > li").equalHeights();
+$(".gallery > li").wsol_equalHeights();
 ```
 
 The plugin can also be removed afterwards:
 ``` javascript
-$(".gallery > li").unequalHeights();
+$(".gallery > li").data("wsol.equalHeights").destroy();
 ```
