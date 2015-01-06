@@ -33,7 +33,12 @@
       <div><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p></div>
       <div><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p></div>
       <div><p>Lorem ipsum dolor sit amet.</p></div>
-      <p><button onclick="$.wsol.equalHeights('.set1 div')">Equal Height this set</button></p>
+      <p>
+        <button onclick="$('.set1 div').wsol_equalHeights();">Equal Height this set</button>
+      </p>
+      <p>
+        <button onclick="$('.set1 div').data('wsol.equalHeights').destroy()">Unequal</button>
+      </p>
     </div>
 
     <p>&nbsp;</p>
@@ -46,18 +51,13 @@
       <div><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p></div>
       <div><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p></div>
       <div><p>Lorem ipsum dolor sit amet.</p></div>
-      <p><button onclick="$.wsol.equalHeights('.set2 div')">Equal Height this set</button></p>
+      <p>
+        <button onclick="$('.set2 div').wsol_equalHeights();">Equal Height this set</button>
+      </p>
+      <p>
+        <button onclick="$('.set2 div').data('wsol.equalHeights').destroy()">Unequal</button>
+      </p>
     </div>
-
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
-
-    <p>
-      <button onclick="$.wsol.destroy()">$.wsol.destroy()</button>
-    </p>
 
   <body>
 
