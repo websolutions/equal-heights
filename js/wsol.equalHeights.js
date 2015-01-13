@@ -21,7 +21,6 @@
 
       // Handle events
       $(window).on("debouncedresize.wsol.equalHeights", base.equalize);
-      base.$group.find("img").on("load.wsol.equalHeights", base.equalize);
     };
 
     base.equalize = function() {
@@ -36,8 +35,7 @@
       base.$group.css("height", "");
 
       // Remove event listeners
-      $(window).off(".wsol.equalHeights");
-      base.$group.find("img").off(".wsol.equalHeights");
+      $(window).off("debouncedresize.wsol.equalHeights", base.equalize);
     };
 
     base.init();
