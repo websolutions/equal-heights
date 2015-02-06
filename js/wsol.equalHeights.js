@@ -27,7 +27,7 @@
       var maxHeight = 0;
       base.$group.css("height", "auto").each(function() {
         var itemHeight = $(this).outerHeight(true);
-        if (itemHeight > maxHeight) maxHeight = itemHeight;
+        if (itemHeight > maxHeight) maxHeight = Math.ceil( itemHeight + 1 );
       }).css("height", maxHeight);
     };
 
