@@ -1,5 +1,5 @@
 /**
- * wsol.equalHeights.js 2.0.0
+ * wsol.equalHeights.js 2.0.1
  * http://github.com/websolutions/equal-heights
  */
 
@@ -8,11 +8,15 @@
     $.wsol = {};
   }
 
+  var $window = $(window),
+      groups = 0;
+
   $.wsol.equalHeights = function(group) {
     var base = this;
 
     base.$group = $(group);
     base.group = group;
+    base.groupId = groups++;
 
     base.$group.data("wsol.equalHeights", base);
 
@@ -20,13 +24,13 @@
       base.equalize();
 
       // Handle events
-      $(window).on("debouncedresize.wsol.equalHeights", base.equalize);
+      $window.on("debouncedresize.wsol.equalHeights.equalHeights-" + base.groupId, base.equalize);
     };
 
     base.equalize = function() {
       var maxHeight = 0;
       base.$group.css("height", "auto").each(function() {
-        var itemHeight = $(this).outerHeight(true);
+        var itemHeight = $(this).outerHeight(false);
         if (itemHeight > maxHeight) maxHeight = itemHeight;
       }).css("height", maxHeight);
     };
@@ -35,7 +39,7 @@
       base.$group.css("height", "");
 
       // Remove event listeners
-      $(window).off("debouncedresize.wsol.equalHeights", base.equalize);
+      $window.off("debouncedresize.wsol.equalHeights.equalHeights-" + base.groupId, base.equalize);
     };
 
     base.init();
