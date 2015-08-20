@@ -1,5 +1,5 @@
 /**
- * wsol.equalHeights.js 2.0.1
+ * wsol.equalHeights.js 2.0.2
  * http://github.com/websolutions/equal-heights
  */
 
@@ -30,7 +30,7 @@
     base.equalize = function() {
       var maxHeight = 0;
       base.$group.css("height", "auto").each(function() {
-        var itemHeight = $(this).outerHeight(true);
+        var itemHeight = $(this).outerHeight(false);
         if (itemHeight > maxHeight) maxHeight = Math.ceil( itemHeight + 1 );
       }).css("height", maxHeight);
     };
